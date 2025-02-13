@@ -48,15 +48,20 @@ public class DLList implements LinearListInterface {
     @Override
     public void add(Object theElement, int index) {
         if (index == 1) {
-            Node newNode = new Node(curr, null, null);
+            Node newNode = new Node(theElement, null, null);
             newNode.setNext(head);
-            head.setPrev(newNode);
+            if (head!= null){
+                head.setPrev(newNode);
+            }
             head = newNode;
         } else if (index == (size + 1)) {
             Node newNode = new Node(theElement, null, null);
             newNode.setPrev(last);
-            last.setNext(newNode);
+            if (last != null){
+                last.setNext(newNode);
+            }
             last = newNode;
+            
         } else {
             setCurrent(index);
             Node newNode = new Node(theElement, null, null);
@@ -81,20 +86,28 @@ public class DLList implements LinearListInterface {
     @Override
     public void remove(int index) {
         setCurrent(index);
-        Node next = curr.getNext();
-        Node prev = curr.getPrev();
-        next.setPrev(prev);
-        prev.setNext(next);
-        curr = prev;
+        if(index == 1){
+            curr.setPrev(null);
+            head = curr.getNext();
+        }else if(index == size){
+            curr.setNext(null);
+            head = curr.getPrev();
+        }else{
+            Node next = curr.getNext();
+            Node prev = curr.getPrev();
+            next.setPrev(prev);
+            prev.setNext(next);
+            curr = prev;        
+        }        
     }
     
     @Override
     public String printList(){
         String details = "";
         
-        for(int i = 1; i < size; i++){
+        for(int i = 0; i < size; i++){
             Node temp = (Node)get(i);
-            details = temp.toString();
+            details = details + "\n"+temp.getElement();
         }
         
         return details;

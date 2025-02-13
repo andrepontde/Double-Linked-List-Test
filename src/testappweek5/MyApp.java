@@ -16,10 +16,12 @@ public class MyApp {
     public static void main(String[] args) {
         // TODO code application logic here
         LinearListInterface myDouble = new DLList();
-        myDouble.add("This is the first element",0);
-        myDouble.add("This is the second element",1);
-        
-        System.out.println(myDouble.printList());
+        myDouble.add("This is the first element",1);
+        System.out.println(""+myDouble.size());
+        myDouble.add("This is the second element",2);
+        myDouble.add("This is the second element",3);
+        myDouble.remove(1);
+        System.out.println(""+myDouble.printList());
     }
     
 }
